@@ -1,0 +1,33 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# eBook 프로젝트 컨텍스트: 파일 구조
+
+이 규칙은 eBook 프로젝트의 파일 구조에 대한 정보를 제공합니다.
+자세한 디렉토리 및 파일 구성은 [eBook_dir_structure.md](mdc:eBook_dir_structure.md) 파일을 참조하십시오.
+
+# File: page2.xhtml
+# Purpose: 알고리즘 예시 설명 및 퀴즈 추가
+# Agent Role: 교육용 콘텐츠 제작 전문가
+# Description: 알고리즘의 종류(순차, 선택, 반복)를 실제 사례와 함께 설명하고, JavaScript와 연동된 간단한 객관식 퀴즈(3문항)를 포함한 페이지입니다. 퀴즈는 선택 시 질문 끝에 True/False 피드백이 2초간 표시됩니다.
+
+## 작성 지침
+- 각 알고리즘 설명은 실제 사례와 함께 작성합니다.
+- HTML5와 XHTML 규칙을 준수합니다.
+- 퀴즈 영역(`div#quiz-area`)을 포함하며, 각 문항은 `<div class="quiz-question">`으로 구성됩니다.
+- 퀴즈 선택지는 `<button class="quiz-option" data-correct="true/false">` 형태로 작성됩니다.
+- 퀴즈 정오답 피드백은 `OEBPS/Misc/script2.js`를 통해 질문 텍스트(`.quiz-question > p:first-of-type`)의 끝에 동적으로 추가/제거됩니다.
+
+## 주요 항목
+- 순차 구조 예시 (ex. 라면 끓이기)
+- 선택 구조 예시 (ex. 우산 챙기기)
+- 반복 구조 예시 (ex. 줄넘기 연습)
+- 개념 확인 퀴즈 3문항 (객관식)
+    - JavaScript (`script2.js`) 연동 정오답 피드백 (True/False 텍스트, 색상 구분, 2초 후 자동 사라짐)
+
+## 키워드
+알고리즘, 순차 구조, 선택 구조, 반복 구조, 흐름도, 조건문, 반복문, JavaScript, XHTML, 퀴즈, 인터랙션, script2.js, 퀴즈 피드백
+
+

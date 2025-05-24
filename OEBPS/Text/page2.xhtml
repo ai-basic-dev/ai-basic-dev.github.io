@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+  <title>알고리즘의 종류와 예시</title>
+  <link href="../Styles/style1.css" rel="stylesheet" type="text/css" />
+  <link href="../Styles/quiz_style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1>알고리즘의 종류를 알아보고 퀴즈도 풀어봐요!</h1>
+
+  <p>알고리즘에는 여러 가지 종류가 있지만, 가장 기본이 되는 세 가지 구조가 있어요. 바로 순차 구조, 선택 구조, 반복 구조랍니다. 이 구조들을 어떻게 활용하는지 예시와 함께 알아볼까요?</p>
+
+  <h2>1. 순차 구조: 차근차근 순서대로!</h2>
+  <p>순차 구조는 이름 그대로 명령들이 정해진 순서에 따라 하나씩 차례대로 실행되는 방식이에요. 마치 요리 레시피처럼, 첫 번째 단계를 끝내면 다음 단계로 넘어가는 거죠.</p>
+  <p><strong>예시: 라면 끓이기</strong></p>
+  <ol>
+    <li>물을 냄비에 넣는다.</li>
+    <li>가스레인지에 불을 켠다.</li>
+    <li>물이 끓으면 면과 스프를 넣는다.</li>
+    <li>정해진 시간만큼 더 끓인다.</li>
+    <li>불을 끄고 맛있게 먹는다!</li>
+  </ol>
+  <p>이처럼 각 단계가 순서대로 진행되어야 맛있는 라면을 완성할 수 있어요. 중간 단계를 건너뛰거나 순서가 바뀌면 제대로 된 결과를 얻기 어렵겠죠?</p>
+
+  <h2>2. 선택 구조: 상황에 맞게 결정해요!</h2>
+  <p>선택 구조는 주어진 조건에 따라 다음에 할 행동이 달라지는 방식이에요. "만약 ~라면 A를 하고, 그렇지 않다면 B를 한다"처럼 여러 갈래 길 중에서 하나를 선택하는 것과 같아요.</p>
+  <p><strong>예시: 우산 챙기기</strong></p>
+  <p>아침에 일어나서 창밖을 봐요.</p>
+  <ul>
+    <li><strong>만약</strong> 비가 온다면: 우산을 챙겨서 나간다.</li>
+    <li><strong>그렇지 않다면</strong> (비가 오지 않는다면): 우산을 챙기지 않고 그냥 나간다.</li>
+  </ul>
+  <p>비가 오는지 안 오는지 (조건)에 따라 우리의 행동(우산을 챙긴다/챙기지 않는다)이 달라지는 것이 바로 선택 구조의 예시랍니다.</p>
+
+  <h2>3. 반복 구조: 똑같은 일을 되풀이해요!</h2>
+  <p>반복 구조는 특정 조건을 만족할 때까지, 또는 정해진 횟수만큼 같은 행동을 되풀이하는 방식이에요. 노래를 여러 번 반복해서 듣거나, 운동장을 여러 바퀴 도는 것처럼요.</p>
+  <p><strong>예시: 줄넘기 연습</strong></p>
+  <p>줄넘기 100번을 목표로 연습한다고 생각해 보세요.</p>
+  <ul>
+    <li>줄넘기를 한 번 한다.</li>
+    <li><strong>만약</strong> 줄넘기 횟수가 100번보다 적다면: 다시 줄넘기를 한 번 더 한다. (이 과정을 100번이 될 때까지 반복)</li>
+    <li>줄넘기 횟수가 100번이 되면: 연습을 마친다.</li>
+  </ul>
+  <p>여기서는 '줄넘기 횟수가 100번보다 적다'는 조건을 만족하는 동안 '줄넘기를 한다'는 행동을 계속 반복하게 됩니다.</p>
+
+  <hr/>
+
+  <h2>📚 개념 확인 퀴즈 📚</h2>
+  <div id="quiz-area">
+    <div class="quiz-question">
+      <p><strong>문제 1:</strong> 다음 중 알고리즘의 기본 구조가 <strong>아닌</strong> 것은 무엇일까요?</p>
+      <ol type="A">
+        <li><button class="quiz-option" data-correct="false">순차 구조</button></li>
+        <li><button class="quiz-option" data-correct="false">선택 구조</button></li>
+        <li><button class="quiz-option" data-correct="true">분산 구조</button></li>
+        <li><button class="quiz-option" data-correct="false">반복 구조</button></li>
+      </ol>
+      <p class="feedback"></p>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>문제 2:</strong> "물을 끓이고, 라면을 넣고, 스프를 넣고, 3분간 더 끓인다."와 같이 순서대로 작업을 처리하는 것은 어떤 구조에 해당할까요?</p>
+      <ol type="A">
+        <li><button class="quiz-option" data-correct="true">순차 구조</button></li>
+        <li><button class="quiz-option" data-correct="false">선택 구조</button></li>
+        <li><button class="quiz-option" data-correct="false">복합 구조</button></li>
+        <li><button class="quiz-option" data-correct="false">반복 구조</button></li>
+      </ol>
+      <p class="feedback"></p>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>문제 3:</strong> "만약 숙제를 다 했으면 게임을 하고, 그렇지 않으면 숙제를 계속한다."는 어떤 구조를 가장 잘 나타내는 예시일까요?</p>
+      <ol type="A">
+        <li><button class="quiz-option" data-correct="false">순차 구조</button></li>
+        <li><button class="quiz-option" data-correct="true">선택 구조 (또는 선택과 반복이 결합된 형태)</button></li>
+        <li><button class="quiz-option" data-correct="false">단순 구조</button></li>
+        <li><button class="quiz-option" data-correct="false">무한 구조</button></li>
+      </ol>
+      <p class="feedback"></p>
+    </div>
+  </div>
+  
+  <!-- 퀴즈 로직을 위한 JavaScript 파일 연결 -->
+  <script src="../Misc/script2.js"></script>
+
+</body>
+</html> 
