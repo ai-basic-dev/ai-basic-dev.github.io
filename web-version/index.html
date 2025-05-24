@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>알고리즘 기초 eBook</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .navigation {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 0.5rem;
+        }
+        
+        .chapter-list {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .chapter-btn {
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
+        }
+        
+        .chapter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(240, 147, 251, 0.4);
+        }
+        
+        .chapter-btn.active {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .content-area {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            min-height: 600px;
+        }
+        
+        .chapter-content {
+            display: none;
+        }
+        
+        .chapter-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .flowchart-container {
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff5f5 100%);
+            text-align: center;
+            border-radius: 10px;
+        }
+        
+        .flowchart-container svg {
+            display: block;
+            margin: 10px auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+        }
+        
+        /* 퀴즈 스타일 */
+        #quiz-area {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .quiz-question {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .quiz-question p {
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .quiz-question ol {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .quiz-question li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .quiz-option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 0.8rem 1.2rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: left;
+        }
+        
+        .quiz-option:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+        }
+        
+        .temp-feedback-span {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            background: white;
+            margin-top: 3rem;
+            border-radius: 10px;
+        }
+        
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .chapter-btn {
+                font-size: 1rem;
+                padding: 0.8rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📚 알고리즘 기초</h1>
+        <p>프로그래밍의 첫걸음을 함께 시작해봐요!</p>
+    </div>
+    
+    <div class="container">
+        <div class="navigation">
+            <div class="nav-title">📖 목차</div>
+            <div class="chapter-list">
+                <button class="chapter-btn active" onclick="showChapter(1)">
+                    1장: 알고리즘의 기초
+                </button>
+                <button class="chapter-btn" onclick="showChapter(2)">
+                    2장: 알고리즘의 종류와 예시
+                </button>
+            </div>
+        </div>
+        
+        <div class="content-area">
+            <!-- Chapter 1 Content -->
+            <div id="chapter1" class="chapter-content active">
+                <h1>알고리즘이란 무엇일까요?</h1>
+
+                <p>알고리즘은 어떤 문제를 해결하기 위한 명확한 방법과 절차를 순서대로 나열한 것을 말해요. 마치 요리 레시피나 게임 설명서처럼, 우리가 원하는 결과를 얻기 위해 따라야 할 지침이랍니다. 같은 문제라도 여러 가지 다른 알고리즘으로 해결할 수 있고, 그중에서도 가장 효율적인 알고리즘을 찾는 것이 중요해요. 잘 만들어진 알고리즘은 문제의 조건이 조금 바뀌더라도 여전히 잘 작동할 수 있어야 합니다.</p>
+
+                <h2>알고리즘이 꼭 갖춰야 할 조건들</h2>
+                <p>좋은 알고리즘이 되기 위해서는 다음과 같은 중요한 조건들을 만족해야 해요:</p>
+                <ul>
+                    <li><strong>입력과 출력:</strong> 알고리즘은 0개 이상의 입력을 받아들일 수 있지만, 반드시 1개 이상의 결과를 출력해야 해요. 우리가 무언가를 넣으면(입력), 어떤 결과가 나와야(출력) 하는 거죠.</li>
+                    <li><strong>명확성:</strong> 알고리즘의 각 단계는 무엇을 해야 하는지 명확하고 이해하기 쉽게 작성되어야 해요. 애매모호한 표현은 안 돼요!</li>
+                    <li><strong>유한성:</strong> 알고리즘은 정해진 단계를 거친 후에는 반드시 끝나야 해요. 무한히 반복되면 문제를 해결할 수 없겠죠?</li>
+                    <li><strong>수행 가능성:</strong> 알고리즘의 모든 명령은 실제로 컴퓨터나 사람이 실행할 수 있는 것이어야 해요. 불가능한 명령은 의미가 없어요.</li>
+                    <li><strong>정확성:</strong> 알고리즘은 주어진 입력에 대해 항상 올바른 결과를 내놓아야 해요. 정확하지 않으면 문제를 제대로 해결할 수 없어요.</li>
+                </ul>
+
+                <h2>알고리즘은 어떻게 문제를 해결할까요?</h2>
+                <p>컴퓨터로 문제를 해결하는 과정에서 알고리즘 설계는 매우 중요한 단계예요. 일반적으로 다음과 같은 과정을 거칩니다.</p>
+                <ol>
+                    <li><strong>문제 이해와 분석:</strong> 가장 먼저 해결해야 할 문제가 무엇인지 정확히 이해하고 분석해야 해요. 무엇이 문제이고, 무엇을 원하는지 명확히 하는 거죠.</li>
+                    <li><strong>추상화:</strong> 복잡한 문제를 작은 단위로 나누고, 문제 해결에 꼭 필요한 핵심 요소만 남기는 과정이에요. 불필요한 부분은 과감히 생략해서 문제를 단순하게 만들어요.</li>
+                    <li><strong>알고리즘 설계:</strong> 분석된 문제를 바탕으로 해결 방법을 구체적인 절차로 설계해요. 이때, 말이나 글, 그림, 또는 순서도 같은 다양한 방법으로 알고리즘을 표현할 수 있어요.</li>
+                    <li><strong>프로그래밍:</strong> 설계된 알고리즘을 컴퓨터가 이해할 수 있는 프로그래밍 언어로 옮겨 적는 과정이에요. 이 과정을 통해 실제 프로그램이 만들어져요.</li>
+                    <li><strong>실행 및 수정:</strong> 만들어진 프로그램이 제대로 작동하는지 실행해보고, 오류가 있다면 찾아서 고치는 과정이에요.</li>
+                </ol>
+
+                <h2>알고리즘의 기본 구조</h2>
+                <p>알고리즘을 만들 때 자주 사용되는 기본적인 생각의 틀, 즉 제어 구조에는 세 가지가 있어요. 이 구조들을 조합해서 복잡한 알고리즘도 만들 수 있답니다.</p>
+                <ul>
+                    <li>
+                        <strong>순차 구조:</strong> 명령들이 위에서 아래로, 정해진 순서대로 차례차례 실행되는 가장 기본적인 구조예요. 마치 책을 앞에서부터 순서대로 읽는 것과 같아요.
+                        <div class="flowchart-container">
+                            <p style="font-weight: bold; margin-bottom: 5px;">[순차 구조 순서도]</p>
+                            <svg width="200" height="220" xmlns="http://www.w3.org/2000/svg">
+                                <style>
+                                    .flow-rect { fill: #eef; stroke: #333; stroke-width: 1.5; }
+                                    .flow-text { font-family: sans-serif; font-size: 14px; text-anchor: middle; fill: #000; }
+                                    .arrow-head { fill: #333; }
+                                </style>
+                                <rect x="50" y="10" width="100" height="30" rx="15" ry="15" class="flow-rect"/>
+                                <text x="100" y="30" class="flow-text">시작</text>
+                                <line x1="100" y1="40" x2="100" y2="60" stroke="#333" stroke-width="1.5"/>
+                                <polygon points="95,60 105,60 100,65" class="arrow-head"/>
+                                <rect x="50" y="65" width="100" height="30" class="flow-rect"/>
+                                <text x="100" y="85" class="flow-text">명령 1</text>
+                                <line x1="100" y1="95" x2="100" y2="115" stroke="#333" stroke-width="1.5"/>
+                                <polygon points="95,115 105,115 100,120" class="arrow-head"/>
+                                <rect x="50" y="120" width="100" height="30" class="flow-rect"/>
+                                <text x="100" y="140" class="flow-text">명령 2</text>
+                                <line x1="100" y1="150" x2="100" y2="170" stroke="#333" stroke-width="1.5"/>
+                                <polygon points="95,170 105,170 100,175" class="arrow-head"/>
+                                <rect x="50" y="175" width="100" height="30" rx="15" ry="15" class="flow-rect"/>
+                                <text x="100" y="195" class="flow-text">끝</text>
+                            </svg>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>선택 구조:</strong> 특정 조건에 따라 실행할 명령이 달라지는 구조예요. "만약 ~라면 A를 하고, 아니라면 B를 해라"처럼 조건에 따라 다른 길을 선택하는 거죠.
+                        <div class="flowchart-container">
+                            <p style="font-weight: bold; margin-bottom: 5px;">[선택 구조 순서도]</p>
+                            <svg width="280" height="250" xmlns="http://www.w3.org/2000/svg">
+                                <style>
+                                    .flow-rect { fill: #eef; stroke: #333; stroke-width: 1.5; }
+                                    .flow-terminator { fill: #fde; stroke: #333; stroke-width: 1.5; rx: 15; ry: 15;}
+                                    .flow-diamond { fill: #ffe; stroke: #333; stroke-width: 1.5; }
+                                    .flow-text { font-family: sans-serif; font-size: 14px; text-anchor: middle; fill: #000;}
+                                    .flow-text-small { font-family: sans-serif; font-size: 12px; text-anchor: middle; fill: #000;}
+                                    .arrow-head { fill: #333; }
+                                </style>
+                                <rect x="90" y="10" width="100" height="30" class="flow-terminator"/>
+                                <text x="140" y="30" class="flow-text">시작</text>
+                                <line x1="140" y1="40" x2="140" y2="60" stroke="#333" stroke-width="1.5"/>
+                                <polygon points="135,60 145,60 140,65" class="arrow-head"/>
+                                
+                                <path d="M140 65 L190 95 L140 125 L90 95 Z" class="flow-diamond"/>
+                                <text x="140" y="100" class="flow-text">조건</text>
+                                
+                                <line x1="190" y1="95" x2="225" y2="95" stroke="#333" stroke-width="1.5"/>
+                                <line x1="225" y1="95" x2="225" y2="115" stroke="#333" stroke-width="1.5"/>
+                                <polygon points="220,115 230,115 225,120" class="arrow-head"/>
+                                <text x="210" y="85" class="flow-text-small">참</text>
+                                <rect x="180" y="120" width="90" height="30" class="flow-rect"/>
+                                <text x="225" y="140" class="flow-text-small">명령 A</text>
+                                
+                                <line x1="90" y1="95" x2="55" y2="95" stroke="#333" stroke-width="1.5"/>
+                                <line x1="55" y1="95" x2="55" y2="115" stroke="#333" stroke-width="1.5"/>
+                                <polygon points="50,115 60,115 55,120" class="arrow-head"/>
+                                <text x="70" y="85" class="flow-text-small">거짓</text>
+                                <rect x="10" y="120" width="90" height="30" class="flow-rect"/>
+                                <text x="55" y="140" class="flow-text-small">명령 B</text>
+                                
+                                <line x1="225" y1="150" x2="225" y2="170" stroke="#333" stroke-width="1.5"/>
+                                <line x1="55" y1="150" x2="55" y2="170" stroke="#333" stroke-width="1.5"/>
+                                <line x1="55" y1="170" x2="225" y2="170" stroke="#333" stroke-width="1.5"/>
+                                <line x1="140" y1="170" x2="140" y2="190" stroke="#333" stroke-width="1.5"/>
+                                <polygon points="135,190 145,190 140,195" class="arrow-head"/>
+                                <rect x="90" y="195" width="100" height="30" class="flow-terminator"/>
+                                <text x="140" y="215" class="flow-text">끝</text>
+                            </svg>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>반복 구조:</strong> 특정 조건을 만족할 때까지 또는 정해진 횟수만큼 같은 명령을 되풀이하는 구조예요.
+                        <div class="flowchart-container">
+                            <p style="font-weight: bold; margin-bottom: 5px;">[반복 구조 순서도]</p>
+                            <svg width="280" height="330" xmlns="http://www.w3.org/2000/svg">
+                                <style>
+                                    .flow-rect { fill: #eef; stroke: #333; stroke-width: 1.5; }
+                                    .flow-terminator { fill: #fde; stroke: #333; stroke-width: 1.5; rx: 15; ry: 15;}
+                                    .flow-diamond { fill: #ffe; stroke: #333; stroke-width: 1.5; }
+                                    .flow-text { font-family: sans-serif; font-size: 14px; text-anchor: middle; fill: #000;}
+                                    .flow-text-label { font-family: sans-serif; font-size: 12px; text-anchor: middle; fill: #000;}
+                                    .arrow-head { fill: #333; }
+                                </style>
+                                
+                                <rect x="75" y="10" width="100" height="30" class="flow-terminator"/>
+                                <text x="125" y="30" class="flow-text">시작</text>
+                                <line x1="125" y1="40" x2="125" y2="60" stroke="#333" stroke-width="1.5"/>
+                                <polygon points="120,60 130,60 125,65" class="arrow-head"/>
+                                
+                                <path d="M125 65 L185 105 L125 145 L65 105 Z" class="flow-diamond"/>
+                                <text x="125" y="110" class="flow-text">조건식</text>
+                                
+                                <line x1="125" y1="145" x2="125" y2="170" stroke="#333" stroke-width="1.5"/>
+                                <polygon points="120,170 130,170 125,175" class="arrow-head"/>
+                                <text x="145" y="160" class="flow-text-label">YES</text>
+                                
+                                <rect x="75" y="175" width="100" height="40" class="flow-rect"/>
+                                <text x="125" y="200" class="flow-text">반복할 명령어</text>
+                                
+                                <line x1="75" y1="195" x2="45" y2="195" stroke="#333" stroke-width="1.5"/>
+                                <line x1="45" y1="195" x2="45" y2="60" stroke="#333" stroke-width="1.5"/>
+                                <line x1="45" y1="60" x2="120" y2="60" stroke="#333" stroke-width="1.5"/>
+                                <polygon points="120,55 120,65 125,60" class="arrow-head"/>
+                                
+                                <line x1="185" y1="105" x2="225" y2="105" stroke="#333" stroke-width="1.5"/>
+                                <polygon points="225,100 225,110 230,105" class="arrow-head"/>
+                                <text x="205" y="95" class="flow-text-label">NO</text> 
+                                
+                                <line x1="225" y1="105" x2="225" y2="250" stroke="#333" stroke-width="1.5"/>
+                                <polygon points="220,250 230,250 225,255" class="arrow-head"/>
+                                <rect x="175" y="255" width="100" height="30" class="flow-terminator"/>
+                                <text x="225" y="275" class="flow-text">끝</text>
+                            </svg>
+                        </div>
+                    </li>
+                </ul>
+                
+                <p>이처럼 알고리즘은 문제를 해결하는 강력한 도구이며, 우리가 배우는 프로그래밍의 핵심이랍니다. 다양한 알고리즘을 이해하고 활용하는 능력을 키우면 복잡한 문제도 논리적으로 해결할 수 있게 될 거예요!</p>
+            </div>
+            
+            <!-- Chapter 2 Content -->
+            <div id="chapter2" class="chapter-content">
+                <h1>알고리즘의 종류를 알아보고 퀴즈도 풀어봐요!</h1>
+
+                <p>알고리즘에는 여러 가지 종류가 있지만, 가장 기본이 되는 세 가지 구조가 있어요. 바로 순차 구조, 선택 구조, 반복 구조랍니다. 이 구조들을 어떻게 활용하는지 예시와 함께 알아볼까요?</p>
+
+                <h2>1. 순차 구조: 차근차근 순서대로!</h2>
+                <p>순차 구조는 이름 그대로 명령들이 정해진 순서에 따라 하나씩 차례대로 실행되는 방식이에요. 마치 요리 레시피처럼, 첫 번째 단계를 끝내면 다음 단계로 넘어가는 거죠.</p>
+                <p><strong>예시: 라면 끓이기</strong></p>
+                <ol>
+                    <li>물을 냄비에 넣는다.</li>
+                    <li>가스레인지에 불을 켠다.</li>
+                    <li>물이 끓으면 면과 스프를 넣는다.</li>
+                    <li>정해진 시간만큼 더 끓인다.</li>
+                    <li>불을 끄고 맛있게 먹는다!</li>
+                </ol>
+                <p>이처럼 각 단계가 순서대로 진행되어야 맛있는 라면을 완성할 수 있어요. 중간 단계를 건너뛰거나 순서가 바뀌면 제대로 된 결과를 얻기 어렵겠죠?</p>
+
+                <h2>2. 선택 구조: 상황에 맞게 결정해요!</h2>
+                <p>선택 구조는 주어진 조건에 따라 다음에 할 행동이 달라지는 방식이에요. "만약 ~라면 A를 하고, 그렇지 않다면 B를 한다"처럼 여러 갈래 길 중에서 하나를 선택하는 것과 같아요.</p>
+                <p><strong>예시: 우산 챙기기</strong></p>
+                <p>아침에 일어나서 창밖을 봐요.</p>
+                <ul>
+                    <li><strong>만약</strong> 비가 온다면: 우산을 챙겨서 나간다.</li>
+                    <li><strong>그렇지 않다면</strong> (비가 오지 않는다면): 우산을 챙기지 않고 그냥 나간다.</li>
+                </ul>
+                <p>비가 오는지 안 오는지 (조건)에 따라 우리의 행동(우산을 챙긴다/챙기지 않는다)이 달라지는 것이 바로 선택 구조의 예시랍니다.</p>
+
+                <h2>3. 반복 구조: 똑같은 일을 되풀이해요!</h2>
+                <p>반복 구조는 특정 조건을 만족할 때까지, 또는 정해진 횟수만큼 같은 행동을 되풀이하는 방식이에요. 노래를 여러 번 반복해서 듣거나, 운동장을 여러 바퀴 도는 것처럼요.</p>
+                <p><strong>예시: 줄넘기 연습</strong></p>
+                <p>줄넘기 100번을 목표로 연습한다고 생각해 보세요.</p>
+                <ul>
+                    <li>줄넘기를 한 번 한다.</li>
+                    <li><strong>만약</strong> 줄넘기 횟수가 100번보다 적다면: 다시 줄넘기를 한 번 더 한다. (이 과정을 100번이 될 때까지 반복)</li>
+                    <li>줄넘기 횟수가 100번이 되면: 연습을 마친다.</li>
+                </ul>
+                <p>여기서는 '줄넘기 횟수가 100번보다 적다'는 조건을 만족하는 동안 '줄넘기를 한다'는 행동을 계속 반복하게 됩니다.</p>
+
+                <hr style="margin: 2rem 0; border: none; height: 2px; background: linear-gradient(to right, #667eea, #764ba2);"/>
+
+                <h2>📚 개념 확인 퀴즈 📚</h2>
+                <div id="quiz-area">
+                    <div class="quiz-question">
+                        <p><strong>문제 1:</strong> 다음 중 알고리즘의 기본 구조가 <strong>아닌</strong> 것은 무엇일까요?</p>
+                        <ol type="A">
+                            <li><button class="quiz-option" data-correct="false">순차 구조</button></li>
+                            <li><button class="quiz-option" data-correct="false">선택 구조</button></li>
+                            <li><button class="quiz-option" data-correct="true">분산 구조</button></li>
+                            <li><button class="quiz-option" data-correct="false">반복 구조</button></li>
+                        </ol>
+                        <p class="feedback"></p>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>문제 2:</strong> "물을 끓이고, 라면을 넣고, 스프를 넣고, 3분간 더 끓인다."와 같이 순서대로 작업을 처리하는 것은 어떤 구조에 해당할까요?</p>
+                        <ol type="A">
+                            <li><button class="quiz-option" data-correct="true">순차 구조</button></li>
+                            <li><button class="quiz-option" data-correct="false">선택 구조</button></li>
+                            <li><button class="quiz-option" data-correct="false">복합 구조</button></li>
+                            <li><button class="quiz-option" data-correct="false">반복 구조</button></li>
+                        </ol>
+                        <p class="feedback"></p>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>문제 3:</strong> "만약 숙제를 다 했으면 게임을 하고, 그렇지 않으면 숙제를 계속한다."는 어떤 구조를 가장 잘 나타내는 예시일까요?</p>
+                        <ol type="A">
+                            <li><button class="quiz-option" data-correct="false">순차 구조</button></li>
+                            <li><button class="quiz-option" data-correct="true">선택 구조</button></li>
+                            <li><button class="quiz-option" data-correct="false">단순 구조</button></li>
+                            <li><button class="quiz-option" data-correct="false">무한 구조</button></li>
+                        </ol>
+                        <p class="feedback"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2024 알고리즘 기초 eBook - GitHub Pages로 제작</p>
+    </div>
+
+    <script>
+        function showChapter(chapterNum) {
+            // 모든 챕터 숨기기
+            const chapters = document.querySelectorAll('.chapter-content');
+            chapters.forEach(chapter => chapter.classList.remove('active'));
+            
+            // 모든 버튼에서 active 클래스 제거
+            const buttons = document.querySelectorAll('.chapter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // 선택한 챕터 보이기
+            document.getElementById('chapter' + chapterNum).classList.add('active');
+            
+            // 선택한 버튼에 active 클래스 추가
+            event.target.classList.add('active');
+        }
+        
+        // 퀴즈 기능
+        document.addEventListener('DOMContentLoaded', function () {
+            const quizOptions = document.querySelectorAll('.quiz-option');
+
+            quizOptions.forEach(option => {
+                option.addEventListener('click', function () {
+                    // 이전에 추가된 임시 피드백 스팬이 있다면 모두 제거합니다.
+                    const existingFeedbackSpans = document.querySelectorAll('.temp-feedback-span');
+                    existingFeedbackSpans.forEach(span => span.remove());
+
+                    const questionDiv = this.closest('.quiz-question');
+                    // 질문 텍스트를 포함하는 <p> 요소를 선택합니다 (일반적으로 첫 번째 <p> 요소).
+                    const questionPara = questionDiv.querySelector('p:first-of-type');
+
+                    if (questionPara) {
+                        const isCorrect = this.dataset.correct === 'true';
+                        const feedbackWord = isCorrect ? '정답! ✅' : '틀렸어요 ❌';
+                        const feedbackColor = isCorrect ? '#28a745' : '#dc3545';
+
+                        // 피드백을 표시할 <span> 요소를 생성합니다.
+                        const feedbackSpan = document.createElement('span');
+                        feedbackSpan.className = 'temp-feedback-span'; // 클래스를 부여하여 쉽게 찾고 제거할 수 있도록 합니다.
+                        feedbackSpan.textContent = ' ' + feedbackWord; // 질문과 구분을 위해 앞에 공백을 추가합니다.
+                        feedbackSpan.style.color = feedbackColor;
+                        feedbackSpan.style.fontWeight = 'bold';
+
+                        // 질문 단락에 피드백 스팬을 추가합니다.
+                        questionPara.appendChild(feedbackSpan);
+
+                        // 3초 후에 피드백 스팬을 제거합니다.
+                        setTimeout(() => {
+                            // setTimeout이 실행될 시점에는 feedbackSpan이 DOM에서 제거되었을 수 있으므로 확인합니다.
+                            if (feedbackSpan.parentNode) {
+                                feedbackSpan.remove();
+                            }
+                        }, 3000);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
